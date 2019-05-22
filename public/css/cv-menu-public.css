@@ -214,11 +214,14 @@ a.drwaer-nav-search-trigger {
 a.drwaer-nav-search-trigger span {
     font-size: 1.75rem;
 }
+a.drwaer-nav-search-trigger.close span:before {
+    content: "\f335";
+}
 a.drawer-nav-trigger.open {
     display: none;
 }
 a.drawer-nav-close {
-    position: absolute;
+    position: fixed;
     display: block;
     top: 15px;
     z-index: 10068;

@@ -43,53 +43,36 @@
             });
         },
         searchBtn: function () {
-            // $('a.drwaer-nav-search-trigger').toggle(
-            //     function (e) {
-            //     e.preventDefault();
-            //
-            //     $('div#cv-menu-search-box').css('transform','translateX(0)');
-            //     $('div#cv-menu-search-box').css('padding-left','40px');
-            //     $('div#cv-menu-search-box').css('padding-right','40px');
-            //
-            //
-            //     },
-            //     function (e) {
-            //         e.preventDefault();
-            //
-            //         $('div#cv-menu-search-box').css('transform','translateX(calc(100vw - 50px)');
-            //         $('div#cv-menu-search-box').css('padding','0');
-            //
-            //
-            //     });
-            $('a.drwaer-nav-search-trigger').on('click',function (e) {
+            $('a.drwaer-nav-search-trigger').toggle(
+                function (e) {
                 e.preventDefault();
-                if($('a.drwaer-nav-search-trigger').hasClass('close')){
-                    console.log('has');
+
+                $('div#cv-menu-search-box').css('transform','translateX(0)');
+                $('div#cv-menu-search-box').css('padding-left','40px');
+                $('div#cv-menu-search-box').css('padding-right','40px');
+                $(this).addClass('close');
+
+
+                },
+                function (e) {
+                    e.preventDefault();
+
+                    $('div#cv-menu-search-box').css('transform','translateX(calc(100vw - 50px)');
+                    $('div#cv-menu-search-box').css('padding','0');
                     $(this).removeClass('close');
-                    $('div#cv-menu-search-box').css('transform','translateX(0)');
-                    $('div#cv-menu-search-box').css('padding-left','40px');
-                    $('div#cv-menu-search-box').css('padding-right','40px');
-                }else{
-                    console.log('d has');
-                }
 
 
-            });
-            // $('a.drwaer-nav-search-trigger').on('click',function (e) {
-            //     e.preventDefault();
-            //     $('div#cv-menu-search-box').css('transform','translateX(calc(100vw - 50px)');
-            //     $('div#cv-menu-search-box').css('padding','0');
-            //
-            // });
+                });
+
             $(document).mouseup(function(e)
             {
                 var container = $('div#cv-menu-search-box');
                 if (!container.is(e.target) &&  container.has(e.target).length === 0)
                 {
-
+                    console.log(e.target);
                     $('div#cv-menu-search-box').css('transform','translateX(calc(100vw - 50px)');
                     $('div#cv-menu-search-box').css('padding','0');
-                    $('a.drwaer-nav-search-trigger').addClass('close');
+                    $('a.drwaer-nav-search-trigger').removeClass('close');
                 }
             });
         }

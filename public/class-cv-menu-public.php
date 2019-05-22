@@ -163,7 +163,7 @@ class Cv_Menu_Public {
 
         <?php if($showsearch == 'on') { ?>
 
-            <a href="#" class="drwaer-nav-search-trigger close">
+            <a href="#" class="drwaer-nav-search-trigger">
                 <span class="dashicons dashicons-search"></span>
             </a>
         <div id="cv-menu-search-box">
