@@ -120,7 +120,7 @@ class Cv_Menu_Admin {
 
     function admin_menu() {
         add_options_page( 'Settings API', 'Settings API', 'delete_posts', 'settings_api_test', array($this, 'plugin_page') );
-        add_menu_page( 'Mobile Menu', 'Mobile Menu', 'delete_posts', 'cv_menu', array($this, 'plugin_page') );
+        add_menu_page( 'Mobile Menu', 'Mobile Menu', 'delete_posts', 'cv_menu', array($this, 'plugin_page'),'dashicons-editor-code' );
     }
 
     function get_settings_sections() {
@@ -128,6 +128,10 @@ class Cv_Menu_Admin {
             array(
                 'id'    => 'cvmenu_basic',
                 'title' => __( 'Basic Settings', 'cv-menu' )
+            ),
+            array(
+                'id'    => 'cvmenu_header',
+                'title' => __( 'Header', 'cv-menu' )
             )
         );
         return $sections;
@@ -149,6 +153,26 @@ class Cv_Menu_Admin {
                     'type'    => 'select',
                     'options' => $this->get_nav_menus(),
                     'default' => 'primary'
+                ),
+                array(
+                    'name'  => 'allowswipe',
+                    'label' => __( 'Swipe Enabled', 'cv-menu' ),
+                    'type'  => 'checkbox',
+                    'default' => 'on'
+                ),
+                array(
+                    'name'  => 'showsearch',
+                    'label' => __( 'Show Search Box', 'cv-menu' ),
+                    'type'  => 'checkbox',
+                    'default' => 'on'
+                ),
+
+                array(
+                    'name'        => 'hideelem',
+                    'label'       => __( 'Hide Specific Html Elements', 'cv-menu' ),
+                    'desc'        => __( 'Hide specific elements when the Mobile Menu is visible(theme menus, or any html element)', 'wedevs' ),
+                    'placeholder' => __( 'e.g. .site-branding or #site-branding', 'cv-menu' ),
+                    'type'        => 'textarea'
                 ),
                 array(
                     'name'    => 'button-position',
@@ -213,15 +237,49 @@ class Cv_Menu_Admin {
                 ),
                 array(
                     'name'  => 'showtop',
-                    'label' => __( 'Show Top Section', 'wedevs' ),
+                    'label' => __( 'Show Top Section', 'cv-menu' ),
                     'type'  => 'checkbox',
                     'default' => 'on'
                 ),
                 array(
                     'name'    => 'topcontent',
-                    'label'   => __( 'Top Section Content', 'wedevs' ),
+                    'label'   => __( 'Top Section Content', 'cv-menu' ),
                     'type'    => 'wysiwyg',
                     'default' => get_bloginfo('name')
+                )
+            ),
+            'cvmenu_header' => array(
+                array(
+                    'name'  => 'showheader',
+                    'label' => __( 'Show Header', 'cv-menu' ),
+                    'type'  => 'checkbox',
+                    'default' => 'on'
+                ),
+                array(
+                    'name'    => 'header-type',
+                    'label'   => __( 'Header Type', 'cv-menu' ),
+                    'type'    => 'radio',
+                    'options' => array(
+                        'logo' => 'Logo',
+                        'text'  => 'Text'
+                    ),
+                    'default' => 'text'
+                ),
+                array(
+                    'name'              => 'logo-text',
+                    'label'             => __( 'Logo Text', 'wedevs' ),
+                    'type'              => 'text',
+                    'default'           => get_bloginfo('name'),
+                    'sanitize_callback' => 'sanitize_text_field'
+                ),
+                array(
+                    'name'    => 'logo',
+                    'label'   => __( 'Logo Image', 'wedevs' ),
+                    'type'    => 'file',
+                    'default' => '',
+                    'options' => array(
+                        'button_label' => 'Choose Logo Image'
+                    )
                 )
             )
         );

@@ -111,8 +111,13 @@ class Cv_Menu_Public {
         $showtop = $this->prefix_get_option('showtop','cvmenu_basic');
         $topcontent = $this->prefix_get_option('topcontent','cvmenu_basic');
         $menu_select = $this->prefix_get_option('menu-select','cvmenu_basic');
+        $showheader = $this->prefix_get_option('showheader','cvmenu_header');
+        $logotext = $this->prefix_get_option('logo-text','cvmenu_header',get_bloginfo('name'));
+        $headertype = $this->prefix_get_option('header-type','cvmenu_header','text');
+        $logo = $this->prefix_get_option('logo','cvmenu_header');
+        $showsearch = $this->prefix_get_option('showsearch','cvmenu_basic','on');
 
-        $html = '<ul id="%1$s" class="%2$s">			<li>';
+        $html = '<ul id="%1$s" class="%2$s"><li>';
         if($showtop == 'on') {
             $html .= '<div class="user-view">';
             if($topbg != '') {
@@ -131,7 +136,7 @@ class Cv_Menu_Public {
                     'menu' => '',
                     'container' => 'div',
                     'container_id' => '',
-                    'menu_class' => 'sidenav',
+                    'menu_class' => 'drawer-nav',
                     'menu_id' => 'slide-out',
                     'items_wrap' => $html,
                 )
@@ -139,8 +144,47 @@ class Cv_Menu_Public {
         }
             ?>
 
-		<a href="#" data-target="slide-out" class="sidenav-trigger"><div class="nav-icon"><span></span></div></a>
-		<a class="sidenav-close" href="#!"><div class="nav-icon"><span></span></div></a>
+        <?php if($showheader == 'on') { ?>
+            <div class="cv-menu-header">
+            <p>
+                <?php
+                if($headertype == 'text') {
+                    echo esc_attr__($logotext);
+                }
+                else{ ?>
+                    <img src="<?php echo $logo ?>" alt="cv-menu-logo">
+            <?php
+                }
+                ?>
+            </p>
+        <?php } ?>
+
+		<a href="#" data-target="slide-out" class="drawer-nav-trigger sidenav-trigger"><div class="nav-icon"><span></span></div></a>
+
+        <?php if($showsearch == 'on') { ?>
+
+            <a href="#" class="drwaer-nav-search-trigger close">
+                <span class="dashicons dashicons-search"></span>
+            </a>
+        <div id="cv-menu-search-box">
+            <form action="<?php echo esc_url( home_url( '/' ) ); ?>" class="responsive-menu-search-form" role="search">
+                <input type="search" name="s" title="Search"
+                       placeholder="<?php echo esc_attr_x( 'Search &hellip;', 'placeholder', 'cv-menu' ); ?>"
+                       value="<?php echo get_search_query(); ?>"
+                       class="cv-menu-search-box">
+                <button type="submit" class="search-submit"><?php echo _x( 'Search', 'submit button', 'twentysixteen' ); ?></button>
+            </form>
+        </div>
+
+        <?php } ?>
+
+		<?php if($showheader == 'on') { ?>
+
+            </div>
+
+        <?php } ?>
+
+		<a class="drawer-nav-close sidenav-close" href="#!"><div class="nav-icon"><span></span></div></a>
 
 
 
@@ -151,16 +195,24 @@ class Cv_Menu_Public {
     public function render_styles()
     {
         $button_position = $this->prefix_get_option('button-position','cvmenu_basic');
+        $direction = $this->prefix_get_option('direction','cvmenu_basic');
+        $closeposition = ($direction == 'left') ? 'right': 'left';
         $bgcolor = $this->prefix_get_option('bgcolor','cvmenu_basic');
         $btncolor = $this->prefix_get_option('button-color','cvmenu_basic');
         $btnbgcolor = $this->prefix_get_option('button-bg-color','cvmenu_basic','#fff');
         $itemcolor = $this->prefix_get_option('itemcolor','cvmenu_basic');
         $itembgcolor = $this->prefix_get_option('itembgcolor','cvmenu_basic');
+        $hideelem = $this->prefix_get_option('hideelem','cvmenu_basic','');
+        $hideelem = explode(',',$hideelem);
+
 
         ?>
         <style>
-            a.sidenav-trigger {
+            a.drawer-nav-trigger {
                 <?php echo $button_position;?>:15px;
+            }
+            a.drawer-nav-close {
+            <?php echo $closeposition;?>:0;
             }
             .cv-menu-primary-navigation ul {
                 background-color: <?php echo $bgcolor;?>;
@@ -171,14 +223,23 @@ class Cv_Menu_Public {
             .cv-menu-primary-navigation ul li {
                 background-color: <?php echo $itembgcolor;?>;
             }
-            a.sidenav-trigger {
-                border: 2px solid <?php echo $btncolor?>;
+            /*a.drawer-nav-trigger {*/
+            /**/
+            /*    border-color: */<?php //echo $btncolor?>/*;*/
+            /*}*/
+            a.drawer-nav-trigger {
+                /*background-color: */<?php //echo $btnbgcolor?>/*;*/
             }
-            a.sidenav-trigger {
-                background-color: <?php echo $btnbgcolor?>;
-            }
-            a.sidenav-trigger .nav-icon:after, a.sidenav-trigger .nav-icon:before, a.sidenav-trigger .nav-icon span {
+            a.drawer-nav-trigger .nav-icon:after, a.drawer-nav-trigger .nav-icon:before, a.drawer-nav-trigger .nav-icon span {
                 background-color: <?php echo $btncolor?>;
+            }
+            <?php
+            foreach ($hideelem as $el) {
+                echo $el.' { display:none !important; }';
+            }
+            ?>
+            a.drwaer-nav-search-trigger {
+                color: <?php echo $btncolor?>;
             }
         </style>
         <?php
@@ -189,6 +250,8 @@ class Cv_Menu_Public {
     {
         $direction = $this->prefix_get_option('direction','cvmenu_basic');
         $menu_select = $this->prefix_get_option('menu-select','cvmenu_basic');
+        $allowswipe = $this->prefix_get_option('menu-select','cvmenu_basic','on');
+        $allowswipe = ($allowswipe == 'on') ? 'true' : 'false';
         if($menu_select != '') {
 
             ?>
@@ -196,19 +259,22 @@ class Cv_Menu_Public {
                 (function ($) {
                     "use strict";
                     $(document).ready(function () {
-                        var elems = document.querySelectorAll('.sidenav');
+                        var elems = document.querySelectorAll('.drawer-nav');
                         var instances = M.Sidenav.init(elems, {
                             onCloseStart: function (e) {
-                                $('a.sidenav-trigger').removeClass('open');
-                                $('a.sidenav-close').css('top', '-100px');
+                                $('a.drawer-nav-trigger').removeClass('open');
+                                $('a.drawer-nav-close').css('top', '-100px');
                             },
                             onOpenEnd: function () {
-                                $('a.sidenav-close').css('top', '0');
-                                $('a.sidenav-close').css('opacity', 1);
+                                $('a.drawer-nav-close').css('top', '0');
+                                $('a.drawer-nav-close').css('opacity', 1);
+
                             },
-                            edge: '<?php echo $direction; ?>'
+                            edge: '<?php echo $direction; ?>',
+                            draggable: <?php echo $allowswipe; ?>
                         });
-                        $('a.sidenav-close').css('top', '-100px');
+                        $('a.drawer-nav-close').css('top', '-100px');
+
                     });
 
 
