@@ -48,8 +48,8 @@
                 e.preventDefault();
 
                 $('div#cv-menu-search-box').css('transform','translateX(0)');
-                $('div#cv-menu-search-box').css('padding-left','40px');
-                $('div#cv-menu-search-box').css('padding-right','40px');
+                $('div#cv-menu-search-box').css('padding-left','60px');
+                $('div#cv-menu-search-box').css('padding-right','60px');
                 $(this).addClass('close');
 
 
@@ -58,7 +58,7 @@
                     e.preventDefault();
 
                     $('div#cv-menu-search-box').css('transform','translateX(calc(100vw - 50px)');
-                    $('div#cv-menu-search-box').css('padding','0');
+                    $('div#cv-menu-search-box').css('padding','0 60px');
                     $(this).removeClass('close');
 
 
@@ -71,7 +71,7 @@
                 {
                     console.log(e.target);
                     $('div#cv-menu-search-box').css('transform','translateX(calc(100vw - 50px)');
-                    $('div#cv-menu-search-box').css('padding','0');
+                    $('div#cv-menu-search-box').css('padding','0 60px');
                     $('a.drwaer-nav-search-trigger').removeClass('close');
                 }
             });

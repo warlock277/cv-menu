@@ -164,7 +164,7 @@ class Cv_Menu_Public {
         <?php if($showsearch == 'on') { ?>
 
             <a href="#" class="drwaer-nav-search-trigger">
-                <span class="dashicons dashicons-search"></span>
+                <span class="icon-search"></span>
             </a>
         <div id="cv-menu-search-box">
             <form action="<?php echo esc_url( home_url( '/' ) ); ?>" class="responsive-menu-search-form" role="search">
@@ -172,7 +172,7 @@ class Cv_Menu_Public {
                        placeholder="<?php echo esc_attr_x( 'Search &hellip;', 'placeholder', 'cv-menu' ); ?>"
                        value="<?php echo get_search_query(); ?>"
                        class="cv-menu-search-box">
-                <button type="submit" class="search-submit"><?php echo _x( 'Search', 'submit button', 'twentysixteen' ); ?></button>
+                <button type="submit" class="search-submit"><span class="icon-search"></span></button>
             </form>
         </div>
 
@@ -204,6 +204,7 @@ class Cv_Menu_Public {
         $itembgcolor = $this->prefix_get_option('itembgcolor','cvmenu_basic');
         $hideelem = $this->prefix_get_option('hideelem','cvmenu_basic','');
         $hideelem = explode(',',$hideelem);
+        $showheader = $this->prefix_get_option('showheader','cvmenu_header');
 
 
         ?>
@@ -236,6 +237,15 @@ class Cv_Menu_Public {
             <?php
             foreach ($hideelem as $el) {
                 echo $el.' { display:none !important; }';
+            }
+            ?>
+            <?php
+            if($showheader){
+            ?>
+            body {
+                padding-top: 60px;
+            }
+            <?php
             }
             ?>
             a.drwaer-nav-search-trigger {
