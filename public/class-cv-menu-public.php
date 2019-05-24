@@ -185,6 +185,12 @@ class Cv_Menu_Public {
             ul#slide-out form button {
                 color: <?php echo $primarycolor;?>;
             }
+            .cv-menu-primary-navigation ul li {
+                border-top: 1px solid <?php echo $primarycolor;?>2b;
+            }
+            .cv-menu-header {
+                background-color: <?php echo $secondarycolor;?>;
+            }
             <?php
             foreach ($hideelem as $el) {
                 echo $el.' { display:none !important; }';
