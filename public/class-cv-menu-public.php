@@ -1,52 +1,11 @@
 <?php
 
-/**
- * The public-facing functionality of the plugin.
- *
- * @link       http://example.com
- * @since      1.0.0
- *
- * @package    Cv_Menu
- * @subpackage Cv_Menu/public
- */
-
-/**
- * The public-facing functionality of the plugin.
- *
- * Defines the plugin name, version, and two examples hooks for how to
- * enqueue the public-facing stylesheet and JavaScript.
- *
- * @package    Cv_Menu
- * @subpackage Cv_Menu/public
- * @author     Your Name <email@example.com>
- */
 class Cv_Menu_Public {
 
-	/**
-	 * The ID of this plugin.
-	 *
-	 * @since    1.0.0
-	 * @access   private
-	 * @var      string    $cv_menu    The ID of this plugin.
-	 */
 	private $cv_menu;
 
-	/**
-	 * The version of this plugin.
-	 *
-	 * @since    1.0.0
-	 * @access   private
-	 * @var      string    $version    The current version of this plugin.
-	 */
 	private $version;
 
-	/**
-	 * Initialize the class and set its properties.
-	 *
-	 * @since    1.0.0
-	 * @param      string    $cv_menu       The name of the plugin.
-	 * @param      string    $version    The version of this plugin.
-	 */
 	public function __construct( $cv_menu, $version ) {
 
 		$this->cv_menu = $cv_menu;
@@ -54,51 +13,13 @@ class Cv_Menu_Public {
 
 	}
 
-	/**
-	 * Register the stylesheets for the public-facing side of the site.
-	 *
-	 * @since    1.0.0
-	 */
 	public function enqueue_styles() {
-
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Cv_Menu_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Cv_Menu_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
 
 		wp_enqueue_style( $this->cv_menu.'core', plugin_dir_url( __FILE__ ) . 'css/cv-menu-public.css', array(), $this->version, 'all' );
 
-        //wp_enqueue_style( $this->cv_menu.'mt', plugin_dir_url( __FILE__ ) . 'css/materialize.min.css', array(), $this->version, 'all' );
-
 	}
 
-	/**
-	 * Register the JavaScript for the public-facing side of the site.
-	 *
-	 * @since    1.0.0
-	 */
 	public function enqueue_scripts() {
-
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Cv_Menu_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Cv_Menu_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
-
-
 
         wp_enqueue_script( $this->cv_menu.'mt', plugin_dir_url( __FILE__ ) . 'js/materialize.min.js', array( 'jquery' ), $this->version, false );
 
@@ -107,6 +28,7 @@ class Cv_Menu_Public {
 	}
 
 	public function render_menu(){
+
         $topbg = $this->prefix_get_option('topbg','cvmenu_basic');
         $showtop = $this->prefix_get_option('showtop','cvmenu_basic');
         $topcontent = $this->prefix_get_option('topcontent','cvmenu_basic');
@@ -124,7 +46,15 @@ class Cv_Menu_Public {
                 $html .= '<div class="background"><img src="'.$topbg.'" alt="cv-menu"></div>';
             }
 			$html .= $topcontent;
+            $html .= ' <form action="'.esc_url( home_url() ).'" class="responsive-menu-search-form" role="search">
+                <input type="search" name="s" title="Search"
+                       placeholder="'.esc_attr_x( 'Search &hellip;','placeholder','cv-menu' ).'"
+                       value="'.get_search_query().'"
+                       class="cv-menu-search-box">
+                <button type="submit" class="search-submit"><i class="icon icon-search">&#xe800;</i></button>
+            </form>';
             $html .= '</div>';
+
         }
 
 		$html .= '</li>%3$s</ul>';
@@ -146,6 +76,7 @@ class Cv_Menu_Public {
 
         <?php if($showheader == 'on') { ?>
             <div class="cv-menu-header">
+            <a href="<?php echo site_url(); ?>">
             <p>
                 <?php
                 if($headertype == 'text') {
@@ -157,6 +88,8 @@ class Cv_Menu_Public {
                 }
                 ?>
             </p>
+            </a>
+
         <?php } ?>
 
 		<a href="#" data-target="slide-out" class="drawer-nav-trigger sidenav-trigger"><div class="nav-icon"><span></span></div></a>
@@ -164,7 +97,7 @@ class Cv_Menu_Public {
         <?php if($showsearch == 'on') { ?>
 
             <a href="#" class="drwaer-nav-search-trigger">
-                <span class="icon-search"></span>
+                <i class="icon icon-search">&#xe800;</i>
             </a>
         <div id="cv-menu-search-box">
             <form action="<?php echo esc_url( home_url( '/' ) ); ?>" class="responsive-menu-search-form" role="search">
@@ -172,7 +105,7 @@ class Cv_Menu_Public {
                        placeholder="<?php echo esc_attr_x( 'Search &hellip;', 'placeholder', 'cv-menu' ); ?>"
                        value="<?php echo get_search_query(); ?>"
                        class="cv-menu-search-box">
-                <button type="submit" class="search-submit"><span class="icon-search"></span></button>
+                <button type="submit" class="search-submit"><i class="icon icon-search">&#xe800;</i></button>
             </form>
         </div>
 
@@ -197,14 +130,17 @@ class Cv_Menu_Public {
         $button_position = $this->prefix_get_option('button-position','cvmenu_basic');
         $direction = $this->prefix_get_option('direction','cvmenu_basic');
         $closeposition = ($direction == 'left') ? 'right': 'left';
-        $bgcolor = $this->prefix_get_option('bgcolor','cvmenu_basic');
-        $btncolor = $this->prefix_get_option('button-color','cvmenu_basic');
-        $btnbgcolor = $this->prefix_get_option('button-bg-color','cvmenu_basic','#fff');
-        $itemcolor = $this->prefix_get_option('itemcolor','cvmenu_basic');
-        $itembgcolor = $this->prefix_get_option('itembgcolor','cvmenu_basic');
+        $bgcolor = $this->prefix_get_option('bgcolor','cvmenu_color');
+        $btncolor = $this->prefix_get_option('button-color','cvmenu_color');
+        $btnbgcolor = $this->prefix_get_option('button-bg-color','cvmenu_color','#fff');
+        $itemcolor = $this->prefix_get_option('itemcolor','cvmenu_color');
+        $itembgcolor = $this->prefix_get_option('itembgcolor','cvmenu_color');
         $hideelem = $this->prefix_get_option('hideelem','cvmenu_basic','');
         $hideelem = explode(',',$hideelem);
         $showheader = $this->prefix_get_option('showheader','cvmenu_header');
+
+        $primarycolor = $this->prefix_get_option('primary-color','cvmenu_color');
+        $secondarycolor = $this->prefix_get_option('secondary-color','cvmenu_color');
 
 
         ?>
@@ -216,13 +152,13 @@ class Cv_Menu_Public {
             <?php echo $closeposition;?>:0;
             }
             .cv-menu-primary-navigation ul {
-                background-color: <?php echo $bgcolor;?>;
+                background-color: <?php echo $secondarycolor;?>;
             }
             .cv-menu-primary-navigation ul li a {
-                color: <?php echo $itemcolor;?>;
+                color: <?php echo $primarycolor;?>;
             }
             .cv-menu-primary-navigation ul li {
-                background-color: <?php echo $itembgcolor;?>;
+                background-color: <?php echo $secondarycolor;?>;
             }
             /*a.drawer-nav-trigger {*/
             /**/
@@ -232,7 +168,22 @@ class Cv_Menu_Public {
                 /*background-color: */<?php //echo $btnbgcolor?>/*;*/
             }
             a.drawer-nav-trigger .nav-icon:after, a.drawer-nav-trigger .nav-icon:before, a.drawer-nav-trigger .nav-icon span {
-                background-color: <?php echo $btncolor?>;
+                background-color: <?php echo $primarycolor?>;
+            }
+            .cv-menu-primary-navigation ul li.menu-item-has-children span.sub-holder:before {
+                border-color: <?php echo $primarycolor?>;
+            }
+            .cv-menu-header p {
+                color: <?php echo $primarycolor;?>;
+            }
+            div#cv-menu-search-box form button {
+                color: <?php echo $primarycolor;?>;
+            }
+            div#cv-menu-search-box form input {
+                border-color: <?php echo $primarycolor;?>;
+            }
+            ul#slide-out form button {
+                color: <?php echo $primarycolor;?>;
             }
             <?php
             foreach ($hideelem as $el) {
@@ -249,7 +200,7 @@ class Cv_Menu_Public {
             }
             ?>
             a.drwaer-nav-search-trigger {
-                color: <?php echo $btncolor?>;
+                color: <?php echo $primarycolor?>;
             }
         </style>
         <?php

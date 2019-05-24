@@ -130,6 +130,10 @@ class Cv_Menu_Admin {
                 'title' => __( 'Basic Settings', 'cv-menu' )
             ),
             array(
+                'id'    => 'cvmenu_color',
+                'title' => __( 'Colors', 'cv-menu' )
+            ),
+            array(
                 'id'    => 'cvmenu_header',
                 'title' => __( 'Header', 'cv-menu' )
             )
@@ -186,18 +190,6 @@ class Cv_Menu_Admin {
                     'default' => 'right'
                 ),
                 array(
-                    'name'    => 'button-color',
-                    'label'   => __( 'Button Color', 'cv-menu' ),
-                    'type'    => 'color',
-                    'default' => '#222'
-                ),
-                array(
-                    'name'    => 'button-bg-color',
-                    'label'   => __( 'Button Background Color', 'cv-menu' ),
-                    'type'    => 'color',
-                    'default' => '#fff'
-                ),
-                array(
                     'name'    => 'direction',
                     'label'   => __( 'Menu Entry Direction', 'cv-menu' ),
                     'desc'    => __( 'Entry Direction Left or Right', 'cv-menu' ),
@@ -207,24 +199,6 @@ class Cv_Menu_Admin {
                         'right'  => 'Right'
                     ),
                     'default' => 'left'
-                ),
-                array(
-                    'name'    => 'bgcolor',
-                    'label'   => __( 'Background Color', 'cv-menu' ),
-                    'type'    => 'color',
-                    'default' => '#fff'
-                ),
-                array(
-                    'name'    => 'itemcolor',
-                    'label'   => __( 'Menu Item Color', 'cv-menu' ),
-                    'type'    => 'color',
-                    'default' => '#666'
-                ),
-                array(
-                    'name'    => 'itembgcolor',
-                    'label'   => __( 'Menu Item Background Color', 'cv-menu' ),
-                    'type'    => 'color',
-                    'default' => '#00000008'
                 ),
                 array(
                     'name'    => 'topbg',
@@ -247,6 +221,51 @@ class Cv_Menu_Admin {
                     'type'    => 'wysiwyg',
                     'default' => get_bloginfo('name')
                 )
+            ),
+            'cvmenu_color' => array(
+                array(
+                    'name'    => 'button-color',
+                    'label'   => __( 'Button Color', 'cv-menu' ),
+                    'type'    => 'color',
+                    'default' => '#222'
+                ),
+                array(
+                    'name'    => 'button-bg-color',
+                    'label'   => __( 'Button Background Color', 'cv-menu' ),
+                    'type'    => 'color',
+                    'default' => '#fff'
+                ),
+                array(
+                    'name'    => 'bgcolor',
+                    'label'   => __( 'Background Color', 'cv-menu' ),
+                    'type'    => 'color',
+                    'default' => '#fff'
+                ),
+                array(
+                    'name'    => 'itemcolor',
+                    'label'   => __( 'Menu Item Color', 'cv-menu' ),
+                    'type'    => 'color',
+                    'default' => '#666'
+                ),
+                array(
+                    'name'    => 'itembgcolor',
+                    'label'   => __( 'Menu Item Background Color', 'cv-menu' ),
+                    'type'    => 'color',
+                    'default' => '#00000008'
+                ),
+                array(
+                    'name'    => 'primary-color',
+                    'label'   => __( 'Primary Color', 'cv-menu' ),
+                    'type'    => 'color',
+                    'default' => '#222'
+                ),
+                array(
+                    'name'    => 'secondary-color',
+                    'label'   => __( 'Secondary Color', 'cv-menu' ),
+                    'type'    => 'color',
+                    'default' => '#f7f7f7'
+                ),
+
             ),
             'cvmenu_header' => array(
                 array(

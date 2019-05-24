@@ -51,6 +51,7 @@
                 $('div#cv-menu-search-box').css('padding-left','60px');
                 $('div#cv-menu-search-box').css('padding-right','60px');
                 $(this).addClass('close');
+                    $(this).find('i').html('&#xe803;');
 
 
                 },
@@ -60,6 +61,7 @@
                     $('div#cv-menu-search-box').css('transform','translateX(calc(100vw - 50px)');
                     $('div#cv-menu-search-box').css('padding','0 60px');
                     $(this).removeClass('close');
+                    $(this).find('i').html('&#xe800;');
 
 
                 });
