@@ -117,7 +117,7 @@ class Cv_Menu_Public {
 
         <?php } ?>
 
-		<a class="drawer-nav-close sidenav-close" href="#!"><div class="nav-icon"><span></span></div></a>
+		<a class="drawer-nav-close sidenav-close" href="javascript:void(0);" style="top: -100px;"><div class="nav-icon"><span></span></div></a>
 
 
 
@@ -177,7 +177,7 @@ class Cv_Menu_Public {
                 color: <?php echo $primarycolor;?>;
             }
             div#cv-menu-search-box form button {
-                color: <?php echo $primarycolor;?>;
+                color: <?php echo $secondarycolor;?>;
             }
             div#cv-menu-search-box form input {
                 border-color: <?php echo $primarycolor;?>;
@@ -206,6 +206,9 @@ class Cv_Menu_Public {
             }
             ?>
             a.drwaer-nav-search-trigger {
+                color: <?php echo $primarycolor?>;
+            }
+            .drawer-nav .user-view {
                 color: <?php echo $primarycolor?>;
             }
         </style>
