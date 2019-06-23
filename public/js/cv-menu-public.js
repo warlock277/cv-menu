@@ -51,7 +51,8 @@
                 $('div#cv-menu-search-box').css('padding-left','60px');
                 $('div#cv-menu-search-box').css('padding-right','60px');
                 $(this).addClass('close');
-                    $(this).find('i').html('&#xe803;');
+                    $(this).find('i').removeClass('icon-search');
+                    $(this).find('i').addClass('icon-cancel');
 
 
                 },
@@ -61,7 +62,8 @@
                     $('div#cv-menu-search-box').css('transform','translateX(calc(100vw - 50px)');
                     $('div#cv-menu-search-box').css('padding','0 60px');
                     $(this).removeClass('close');
-                    $(this).find('i').html('&#xe800;');
+                    $(this).find('i').removeClass('icon-cancel');
+                    $(this).find('i').addClass('icon-search');
 
 
                 });

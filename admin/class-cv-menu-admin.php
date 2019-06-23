@@ -187,7 +187,7 @@ class Cv_Menu_Admin {
                         'left' => 'Left',
                         'right'  => 'Right'
                     ),
-                    'default' => 'right'
+                    'default' => 'left'
                 ),
                 array(
                     'name'    => 'direction',
@@ -200,15 +200,15 @@ class Cv_Menu_Admin {
                     ),
                     'default' => 'left'
                 ),
-                array(
-                    'name'    => 'topbg',
-                    'label'   => __( 'Top Section Background', 'cv-menu' ),
-                    'type'    => 'file',
-                    'default' => 'http://materializecss.com/images/office.jpg',
-                    'options' => array(
-                        'button_label' => 'Choose Image'
-                    )
-                ),
+//                array(
+//                    'name'    => 'topbg',
+//                    'label'   => __( 'Top Section Background', 'cv-menu' ),
+//                    'type'    => 'file',
+//                    'default' => 'http://materializecss.com/images/office.jpg',
+//                    'options' => array(
+//                        'button_label' => 'Choose Image'
+//                    )
+//                ),
                 array(
                     'name'  => 'showtop',
                     'label' => __( 'Show Top Section', 'cv-menu' ),
@@ -223,47 +223,47 @@ class Cv_Menu_Admin {
                 )
             ),
             'cvmenu_color' => array(
-                array(
-                    'name'    => 'button-color',
-                    'label'   => __( 'Button Color', 'cv-menu' ),
-                    'type'    => 'color',
-                    'default' => '#222'
-                ),
-                array(
-                    'name'    => 'button-bg-color',
-                    'label'   => __( 'Button Background Color', 'cv-menu' ),
-                    'type'    => 'color',
-                    'default' => '#fff'
-                ),
-                array(
-                    'name'    => 'bgcolor',
-                    'label'   => __( 'Background Color', 'cv-menu' ),
-                    'type'    => 'color',
-                    'default' => '#fff'
-                ),
-                array(
-                    'name'    => 'itemcolor',
-                    'label'   => __( 'Menu Item Color', 'cv-menu' ),
-                    'type'    => 'color',
-                    'default' => '#666'
-                ),
-                array(
-                    'name'    => 'itembgcolor',
-                    'label'   => __( 'Menu Item Background Color', 'cv-menu' ),
-                    'type'    => 'color',
-                    'default' => '#00000008'
-                ),
+//                array(
+//                    'name'    => 'button-color',
+//                    'label'   => __( 'Button Color', 'cv-menu' ),
+//                    'type'    => 'color',
+//                    'default' => '#333333'
+//                ),
+//                array(
+//                    'name'    => 'button-bg-color',
+//                    'label'   => __( 'Button Background Color', 'cv-menu' ),
+//                    'type'    => 'color',
+//                    'default' => '#fff'
+//                ),
+//                array(
+//                    'name'    => 'bgcolor',
+//                    'label'   => __( 'Background Color', 'cv-menu' ),
+//                    'type'    => 'color',
+//                    'default' => '#fff'
+//                ),
+//                array(
+//                    'name'    => 'itemcolor',
+//                    'label'   => __( 'Menu Item Color', 'cv-menu' ),
+//                    'type'    => 'color',
+//                    'default' => '#333333'
+//                ),
+//                array(
+//                    'name'    => 'itembgcolor',
+//                    'label'   => __( 'Menu Item Background Color', 'cv-menu' ),
+//                    'type'    => 'color',
+//                    'default' => '#00000008'
+//                ),
                 array(
                     'name'    => 'primary-color',
                     'label'   => __( 'Primary Color', 'cv-menu' ),
                     'type'    => 'color',
-                    'default' => '#222'
+                    'default' => '#333333'
                 ),
                 array(
                     'name'    => 'secondary-color',
                     'label'   => __( 'Secondary Color', 'cv-menu' ),
                     'type'    => 'color',
-                    'default' => '#f7f7f7'
+                    'default' => '#f1f1f1'
                 ),
 
             ),
