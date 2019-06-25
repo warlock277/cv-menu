@@ -38,8 +38,8 @@ class Cv_Menu_Public {
         $showtop = $this->prefix_get_option('showtop','cvmenu_basic');
         $topcontent = $this->prefix_get_option('topcontent','cvmenu_basic');
         $menu_select = $this->prefix_get_option('menu-select','cvmenu_basic');
-        $showheader = $this->prefix_get_option('showheader','cvmenu_header');
-        $logotext = $this->prefix_get_option('logo-text','cvmenu_header',get_bloginfo('name'));
+        $showheader = $this->prefix_get_option('showheader','cvmenu_header','on');
+        $logotext = $this->prefix_get_option('logo-text','cvmenu_header', get_bloginfo('name'));
         $headertype = $this->prefix_get_option('header-type','cvmenu_header','text');
         $logo = $this->prefix_get_option('logo','cvmenu_header');
         $showsearch = $this->prefix_get_option('showsearch','cvmenu_basic','on');
@@ -157,7 +157,7 @@ class Cv_Menu_Public {
                 background-color: <?php echo $secondarycolor;?>;
             }
             .cv-menu-primary-navigation ul li a {
-                color: <?php echo $primarycolor;?>;
+                color: <?php echo $primarycolor;?> !important;
             }
             .cv-menu-primary-navigation ul li {
                 background-color: <?php echo $secondarycolor;?>;

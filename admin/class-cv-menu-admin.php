@@ -119,8 +119,7 @@ class Cv_Menu_Admin {
     }
 
     function admin_menu() {
-        add_options_page( 'Settings API', 'Settings API', 'delete_posts', 'settings_api_test', array($this, 'plugin_page') );
-        add_menu_page( 'Mobile Menu', 'Mobile Menu', 'delete_posts', 'cv_menu', array($this, 'plugin_page'),'dashicons-editor-code' );
+        add_menu_page( 'SlideNav - Responsive Mobile Menu for Wordpress', 'SlideNav', 'delete_posts', 'cv_menu', array($this, 'plugin_page'),'dashicons-cv-menu' );
     }
 
     function get_settings_sections() {
@@ -347,7 +346,7 @@ class Cv_Menu_Admin {
     {
 
         if(count($this->get_nav_menus()) < 1){
-            $message = '<h2>WP Mobile Menu</h2>';
+            $message = '<h2>SlideNav - Responsive Mobile Menu for Wordpress</h2>';
             $message .= '<h4>Please Assign a Menu first. <a href="nav-menus.php">Assign Menu</a></h4>';
             ?>
             <div class="notice error notice-errors is-dismissible">
@@ -358,7 +357,7 @@ class Cv_Menu_Admin {
             $menu_select = $this->prefix_get_option('menu-select','cvmenu_basic');
 
             if($menu_select == ''){
-                $message = '<h2>WP Mobile Menu</h2>';
+                $message = '<h2>SlideNav - Responsive Mobile Menu for Wordpress</h2>';
                 $message .= '<h4>Please Select The Menu to Replace with Mobile Menu! <a href="admin.php?page=cv_menu">Select Menu</a></h4>';
 
                 ?>
